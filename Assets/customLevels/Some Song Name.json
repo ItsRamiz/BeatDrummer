@@ -1,0 +1,96 @@
+{
+  "DrumsConfig": [
+    {
+      "drumID": 3,
+      "drumPosition": {
+        "x": -9.196727,
+        "y": 0.656197548,
+        "z": -1.33596158
+      },
+      "drumRotation": {
+        "x": 10.6699781,
+        "y": 4.72980642,
+        "z": 328.425018
+      }
+    },
+    {
+      "drumID": 2,
+      "drumPosition": {
+        "x": -9.021444,
+        "y": 0.583346367,
+        "z": -0.6484138
+      },
+      "drumRotation": {
+        "x": 315.417755,
+        "y": 57.87684,
+        "z": 139.707428
+      }
+    },
+    {
+      "drumID": 1,
+      "drumPosition": {
+        "x": -8.583914,
+        "y": 0.612817943,
+        "z": -1.78349328
+      },
+      "drumRotation": {
+        "x": 31.6561317,
+        "y": 85.7131653,
+        "z": 46.9919052
+      }
+    }
+  ],
+  "NotesArray": {
+    "157": {
+      "Id": 1,
+      "HitFrame": 157,
+      "DrumId": 3
+    },
+    "178": {
+      "Id": 1,
+      "HitFrame": 178,
+      "DrumId": 2
+    },
+    "218": {
+      "Id": 1,
+      "HitFrame": 218,
+      "DrumId": 1
+    },
+    "243": {
+      "Id": 1,
+      "HitFrame": 243,
+      "DrumId": 3
+    },
+    "267": {
+      "Id": 1,
+      "HitFrame": 267,
+      "DrumId": 2
+    },
+    "283": {
+      "Id": 1,
+      "HitFrame": 283,
+      "DrumId": 3
+    },
+    "308": {
+      "Id": 1,
+      "HitFrame": 308,
+      "DrumId": 2
+    },
+    "315": {
+      "Id": 1,
+      "HitFrame": 315,
+      "DrumId": 1
+    },
+    "330": {
+      "Id": 1,
+      "HitFrame": 330,
+      "DrumId": 3
+    },
+    "346": {
+      "Id": 1,
+      "HitFrame": 346,
+      "DrumId": 3
+    }
+  },
+  "SongPath": "Some Song Path"
+}
