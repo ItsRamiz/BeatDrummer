@@ -377,10 +377,13 @@ public class LevelEditor : MonoBehaviour
 
         StopPlaying.gameObject.SetActive(false);
 
+        LoadLevel.gameObject.SetActive(false);
+
+        TestButton.gameObject.SetActive(false);
 
     }
     private float deltaTime = 0.0f;
-    private HashSet<int> processedFrames = new HashSet<int>();
+    public HashSet<int> processedFrames = new HashSet<int>();
 
     // Update is called once per frame
     void Update()
@@ -388,7 +391,6 @@ public class LevelEditor : MonoBehaviour
         if (isPlaying)
         {
             currentGameplayFrame = (int)videoTimeScrubControl.GetCurrentFrame();
-
             if (!processedFrames.Contains(currentGameplayFrame))
             {
                 if (notesArray.ContainsKey(currentGameplayFrame + 60))
@@ -425,6 +427,8 @@ public class LevelEditor : MonoBehaviour
         drums_Queue.Clear();
 
         spawnedDrumsCount = 0;
+
+        isPlaying = false;
 
 
     }
@@ -490,6 +494,7 @@ public class LevelEditor : MonoBehaviour
         EnableEditorButton.gameObject.SetActive(false);
 
         isPlaying = true;
+
 
     }
 
@@ -921,6 +926,7 @@ public class LevelEditor : MonoBehaviour
         PreviewVideoPlayer.Prepare();  // Start preparing the video
 
         isPlaying = true;
+        processedFrames.Clear();
         currentPlayingNote = 0;
         currentGameplayFrame = 0;
 
@@ -1115,26 +1121,35 @@ public class LevelEditor : MonoBehaviour
 
     void YourFunction(Drum drum)
     {
+
         VideoTimeScrubControl videoTimeScrubControl = FindObjectOfType<VideoTimeScrubControl>();
         int currentFrame = (int)videoTimeScrubControl.GetCurrentFrame();
 
+        if (isPlaying == true)
+        {
+
+        }
         //Debug.Log("Function called for drum ID: " + drum.drumID);
 
-        DrumNote newNote = new DrumNote(1,currentFrame, drum.drumID, null);
-
-        AddButton(newNote,"Frame = " + currentFrame + " ID = " + drum.drumID);
-
-        foreach (var drumm in drums_Queue)
+        if (currentFrame > 0) 
         {
-            Renderer drumRenderer = drumm.DrumBallPrefab.GetComponent<Renderer>();
-            if (drumRenderer != null)
+
+            DrumNote newNote = new DrumNote(1,currentFrame, drum.drumID, null);
+
+            AddButton(newNote,"Frame = " + currentFrame + " ID = " + drum.drumID);
+
+            foreach (var drumm in drums_Queue)
             {
-                Color currentColor = drumRenderer.material.GetColor("_BaseColor");
-                if (currentColor.Equals(Color.yellow))
+                Renderer drumRenderer = drumm.DrumBallPrefab.GetComponent<Renderer>();
+                if (drumRenderer != null)
                 {
-                    drumRenderer.material.SetColor("_BaseColor", Color.green);
-                    score++;
-                    Debug.Log("Score = " + score);
+                    Color currentColor = drumRenderer.material.GetColor("_BaseColor");
+                    if (currentColor.Equals(Color.yellow))
+                    {
+                        drumRenderer.material.SetColor("_BaseColor", Color.green);
+                        score++;
+                        Debug.Log("Score = " + score);
+                    }
                 }
             }
         }
@@ -1160,8 +1175,6 @@ public class LevelEditor : MonoBehaviour
             Vector3 offset = new Vector3(-10, 0, 0);  // Adjust to 10-unit travel instead of 20
             Vector3 drumPosition = GetDrumByID(identifier).GetPosition();
             Vector3 startPosition = drumPosition + offset;
-
-            Debug.Log($"drum ID: {identifier}, current frame: {currentGameplayFrame}");
 
             // Instantiate and move the note towards the drum
             GameObject flyingObjectInstance = Instantiate(noteCapsulePrefab);

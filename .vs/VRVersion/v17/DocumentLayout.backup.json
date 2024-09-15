@@ -5,14 +5,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{4476865F-B4C3-D863-0AD9-55915AADFE62}|Assembly-CSharp.csproj|c:\\users\\ramiz\\vrversion\\assets\\scripts\\leveleditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4476865F-B4C3-D863-0AD9-55915AADFE62}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\leveleditor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4476865F-B4C3-D863-0AD9-55915AADFE62}|Assembly-CSharp.csproj|c:\\users\\ramiz\\vrversion\\assets\\vrtemplateassets\\scripts\\videotimescrubcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4476865F-B4C3-D863-0AD9-55915AADFE62}|Assembly-CSharp.csproj|solutionrelative:assets\\vrtemplateassets\\scripts\\videotimescrubcontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4476865F-B4C3-D863-0AD9-55915AADFE62}|Assembly-CSharp.csproj|c:\\users\\ramiz\\vrversion\\assets\\vrtemplateassets\\scripts\\beziercurve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4476865F-B4C3-D863-0AD9-55915AADFE62}|Assembly-CSharp.csproj|solutionrelative:assets\\vrtemplateassets\\scripts\\beziercurve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,34 +14,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 193,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "VideoTimeScrubControl.cs",
-              "DocumentMoniker": "C:\\Users\\Ramiz\\VRVersion\\Assets\\VRTemplateAssets\\Scripts\\VideoTimeScrubControl.cs",
-              "RelativeDocumentMoniker": "Assets\\VRTemplateAssets\\Scripts\\VideoTimeScrubControl.cs",
-              "ToolTip": "C:\\Users\\Ramiz\\VRVersion\\Assets\\VRTemplateAssets\\Scripts\\VideoTimeScrubControl.cs",
-              "RelativeToolTip": "Assets\\VRTemplateAssets\\Scripts\\VideoTimeScrubControl.cs",
-              "ViewState": "AQIAAJoAAAAAAAAAAAAkwK0AAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T13:48:41.97Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BezierCurve.cs",
-              "DocumentMoniker": "C:\\Users\\Ramiz\\VRVersion\\Assets\\VRTemplateAssets\\Scripts\\BezierCurve.cs",
-              "RelativeDocumentMoniker": "Assets\\VRTemplateAssets\\Scripts\\BezierCurve.cs",
-              "ToolTip": "C:\\Users\\Ramiz\\VRVersion\\Assets\\VRTemplateAssets\\Scripts\\BezierCurve.cs",
-              "RelativeToolTip": "Assets\\VRTemplateAssets\\Scripts\\BezierCurve.cs",
-              "ViewState": "AQIAADcAAAAAAAAAAADgv0kAAAAOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T12:50:33.683Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -58,7 +24,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\LevelEditor.cs",
               "ToolTip": "C:\\Users\\Ramiz\\VRVersion\\Assets\\Scripts\\LevelEditor.cs",
               "RelativeToolTip": "Assets\\Scripts\\LevelEditor.cs",
-              "ViewState": "AQIAAJEBAAAAAAAAAAAswMABAAAFAAAA",
+              "ViewState": "AgIAAE0DAAAAAAAAAAAEwF8DAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-20T14:31:13.265Z",
               "EditorCaption": ""
