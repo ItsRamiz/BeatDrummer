@@ -74,6 +74,7 @@
     <Compile Include="Assets\VRTemplateAssets\Scripts\CalloutGazeController.cs" />
     <Compile Include="Assets\Scripts\MoveObjects.cs" />
     <Compile Include="Assets\Prefabs\DrumTriggerInteraction.cs" />
+    <Compile Include="Assets\Scripts\notesScript.cs" />
     <Compile Include="Assets\Scripts\LevelEditor.cs" />
     <Compile Include="Assets\VRTemplateAssets\Scripts\BezierCurve.cs" />
     <Compile Include="Assets\VRTemplateAssets\Scripts\LaunchProjectile.cs" />

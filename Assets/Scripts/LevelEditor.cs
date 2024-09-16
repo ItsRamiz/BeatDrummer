@@ -71,6 +71,10 @@ public class Drum
     {
         return this.DrumBallPrefab;
     }
+    public void SetDrumBall(GameObject drumBall)
+    {
+        this.DrumBallPrefab = drumBall;
+    }
 
     public Vector3 GetPosition()
     {
@@ -180,6 +184,7 @@ public class LevelEditor : MonoBehaviour
     public string customLevelsDirectoryPath = "C:\\Users\\Ramiz\\VRSample\\Assets\\customLevelsDir";
     public GameObject chooseSongButtonPrefab;
     public GameObject DrumBallPrefab;
+    public GameObject DrumBallPrefabNoCol;
     public GameObject chooseSongPanel;
     public GameObject mainMenuPanel;
     public GameObject customChooseSongPanel;
@@ -251,6 +256,8 @@ public class LevelEditor : MonoBehaviour
 
     public GameObject noteCapsulePrefab;
 
+    public bool disableCollider = false;
+
     float coroutineCooldown = 1.0f;  // 1 second cooldown between coroutine calls
     float lastCoroutineTime = 0f;  // Time since last coroutine call
 
@@ -318,11 +325,6 @@ public class LevelEditor : MonoBehaviour
         //Debug.Log("CustomLevelCount = " + customLevelCount);
 
         LoadCustomButtons();
-
-
-
-
-
 
         addDrumButton.onClick.AddListener(addDrumToWorld);
         removeDrumButton.onClick.AddListener(removeDrumFromWorld);
@@ -495,6 +497,8 @@ public class LevelEditor : MonoBehaviour
 
         isPlaying = true;
 
+        disableCollider = true;
+
 
     }
 
@@ -536,6 +540,8 @@ public class LevelEditor : MonoBehaviour
         drums_Queue.Clear();
 
         spawnedDrumsCount = 0;
+
+        disableCollider = false;
 
     }
 
@@ -910,7 +916,7 @@ public class LevelEditor : MonoBehaviour
         {
             Vector3 spawnPosition = drum.GetPosition();
             Quaternion spawnRotation = Quaternion.Euler(drum.GetRotation());
-            addDrumToWorld(spawnPosition, spawnRotation);
+            addDrumToWorld(spawnPosition, spawnRotation, true);
         }
 
         foreach (var noteEntry in notesArray)
@@ -952,7 +958,9 @@ public class LevelEditor : MonoBehaviour
             if (grabInteractable != null)
             {
                 grabInteractable.enabled = false;
+
             }
+
         }
     }
 
@@ -974,27 +982,52 @@ public class LevelEditor : MonoBehaviour
 
         GameObject newBall = Instantiate(DrumBallPrefab, newSpawnPoint, Quaternion.identity);
 
+        if (disableCollider == true)
+        {
+            newBall.GetComponent<Collider>().enabled = false;
+
+        }
+
         newBall.transform.position = newSpawnPoint;
 
         Drum newDrum = new Drum(spawnedDrumsCount, newSpawnPoint, newBall);
 
         drums_Queue.Push(newDrum);
+
 
     }
 
-    void addDrumToWorld(Vector3 spawnPoint, Quaternion rotation)
+    void addDrumToWorld(Vector3 spawnPoint, Quaternion rotation, bool noCol)
     {
-        Vector3 newSpawnPoint = spawnPoint;
+        if (noCol == false)
+        {
+            Vector3 newSpawnPoint = spawnPoint;
 
-        spawnedDrumsCount++;
+            spawnedDrumsCount++;
 
-        GameObject newBall = Instantiate(DrumBallPrefab, newSpawnPoint, rotation);
+            GameObject newBall = Instantiate(DrumBallPrefab, newSpawnPoint, rotation);
 
-        newBall.transform.position = newSpawnPoint;
+            newBall.transform.position = newSpawnPoint;
 
-        Drum newDrum = new Drum(spawnedDrumsCount, newSpawnPoint, newBall);
+            Drum newDrum = new Drum(spawnedDrumsCount, newSpawnPoint, newBall);
 
-        drums_Queue.Push(newDrum);
+            drums_Queue.Push(newDrum);
+        }
+        else
+        {
+            Vector3 newSpawnPoint = spawnPoint;
+
+            spawnedDrumsCount++;
+
+            GameObject newBall = Instantiate(DrumBallPrefabNoCol, newSpawnPoint, rotation);
+
+            newBall.transform.position = newSpawnPoint;
+
+            Drum newDrum = new Drum(spawnedDrumsCount, newSpawnPoint, newBall);
+
+            drums_Queue.Push(newDrum);
+
+        }
 
     }
     void removeDrumFromWorld()
@@ -1111,7 +1144,7 @@ public class LevelEditor : MonoBehaviour
         {
             if (drum.GetDrumBall() == touchedDrum)
             {
-                //Debug.Log("Touched drum ID: " + drum.drumID);
+                Debug.Log("Touched drum ID: " + drum.drumID);
                 // Perform additional actions with the touched drum
                 YourFunction(drum);
                 break;
@@ -1173,6 +1206,9 @@ public class LevelEditor : MonoBehaviour
         if (currentGameplayFrame >= spawnFrame)
         {
             Vector3 offset = new Vector3(-10, 0, 0);  // Adjust to 10-unit travel instead of 20
+
+            Vector3 distanceOffset = new Vector3(+5, 0, 0);
+
             Vector3 drumPosition = GetDrumByID(identifier).GetPosition();
             Vector3 startPosition = drumPosition + offset;
 
@@ -1181,7 +1217,7 @@ public class LevelEditor : MonoBehaviour
             flyingObjectInstance.transform.position = startPosition;
             flyingObjectInstance.SetActive(true);
 
-            Vector3 destination = drumPosition;  // The target destination is the drum's position
+            Vector3 destination = drumPosition + distanceOffset;  // The target destination is the drum's position
 
             // Move the object towards the drum
             while (Vector3.Distance(flyingObjectInstance.transform.position, destination) > 0.1f)
@@ -1192,12 +1228,42 @@ public class LevelEditor : MonoBehaviour
                 // Move the flying object in the direction of the destination
                 flyingObjectInstance.transform.Translate(direction * speed * Time.deltaTime, Space.World);
 
+                notesScript flyingObjectBehavior = flyingObjectInstance.GetComponent<notesScript>();
+
+                // Now you can access isTouched from the flyingObjectBehavior instance
+                if (flyingObjectBehavior != null && flyingObjectBehavior.isTouched)
+                {
+                    // Get the drum's GameObject
+                    GameObject drumObject = GetDrumByID(identifier).GetDrumBall();
+
+                    // Get the Renderer of the drum object to change its color
+                    Renderer drumRenderer = drumObject.GetComponent<Renderer>();
+                    if (drumRenderer != null)
+                    {
+
+
+                        // Change the drum color to green
+                        drumRenderer.material.SetColor("_BaseColor", Color.green);
+
+                        // Wait for 0.6 seconds before changing the color back
+                        StartCoroutine(RevertColorAfterDelay(drumRenderer, 0.6f));
+                    }
+                }
+
                 yield return null;  // Wait for the next frame
             }
 
             // Once the object has reached the destination, destroy it
             Destroy(flyingObjectInstance);
         }
+    }
+    IEnumerator RevertColorAfterDelay(Renderer drumRenderer, float delay)
+    {
+        // Wait for the specified delay
+        yield return new WaitForSeconds(delay);
+
+        // Revert the drum's color to its original color (assuming white)
+        drumRenderer.material.SetColor("_BaseColor", Color.white);
     }
     public Drum GetDrumByID(int id)
     {
